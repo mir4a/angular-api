@@ -1,0 +1,11 @@
+.ng-invalid.ng-dirty {
+    border-color: orangered;
+}
+
+.ng-valid.ng-dirty {
+    border-color: darkgreen;
+}
+
+h3.panel-heading {
+    margin-top: 0;
+}

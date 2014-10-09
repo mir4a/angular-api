@@ -1,0 +1,9 @@
+extends layout
+
+block content
+	.test_page
+		| Hello on test page
+		.test_wrap(ng-controller="TestController as test")
+			ul
+				li(ng-repeat="user in test.users")
+					| {{ user.first_name }} {{ user.last_name }} — {{ user.email }}

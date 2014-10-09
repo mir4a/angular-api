@@ -1,0 +1,20 @@
+{
+  "name": "angular-api",
+  "version": "0.0.1",
+  "description": "Shaping Up with **Angular.js** is sets of tutorials to get  acquainted with AngularJS basics. See more on [http://campus.codeschool.com/courses/shaping-up-with-angular-js]",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "private": true,
+  "dependencies": {
+    "mongoose": "~3.8.16",
+    "express": "~4.9.4",
+    "jade": "~1.7.0"
+  }
+}
