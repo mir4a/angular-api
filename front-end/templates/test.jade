@@ -4,6 +4,12 @@ block content
 	.test_page
 		| Hello on test page
 		.test_wrap(ng-controller="TestController as test")
-			ul
-				li(ng-repeat="user in test.users")
+			ul.users_list
+				li(ng-repeat="user in test.users", ng-class-odd="'red'")
 					| {{ user.first_name }} {{ user.last_name }} — {{ user.email }}
+
+			br
+			textarea(ng-model="text", name="text")
+			br
+			pre
+				| {{ text }}

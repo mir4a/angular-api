@@ -9,3 +9,7 @@
 h3.panel-heading {
     margin-top: 0;
 }
+
+.users_list .red {
+    color: red;
+}
