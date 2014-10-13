@@ -2,12 +2,7 @@
 module.exports = function (app) {
 
   app.get('/', function (req, res) {
-    res.render(__dirname + '/../../front-end/templates/home.jade');
-  });
-
-
-  app.get('/test', function (req, res) {
-    res.render(__dirname + '/../../front-end/templates/test.jade');
+    res.render(__dirname + '/../../front-end/templates/index.jade');
   });
 
   app.get('/api/:name', function (req, res) {

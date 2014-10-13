@@ -6,6 +6,13 @@ html(ng-app="api")
 		script(src="/vendor/angular/angular.js")
 		script(src="/vendor/angular-route/angular-route.js")
 		script(src="/app.js")
+		script(src="/route/route-config.js")
+		script(src="/home/home.module.js")
+		script(src="/home/home.ctrl.js")
+		script(src="/page1/page1.module.js")
+		script(src="/page1/page1.ctrl.js")
+		script(src="/users/users.module.js")
+		script(src="/users/users.ctrl.js")
 		link(rel="stylesheet", type="text/css", href="/vendor/bootstrap/dist/css/bootstrap.css")
 		link(rel="stylesheet", type="text/css", href="/css/main.css")
 	body
@@ -15,8 +22,7 @@ html(ng-app="api")
 		.container
 			.row
 				.col-sm-9
-					section.content
-						block content
+					section.content(ng-view)
 				.col-sm-3
 					aside.sidebar
-						Some side bar
+						include sidebar

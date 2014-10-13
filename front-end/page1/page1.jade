@@ -1,18 +1,15 @@
-extends ../templates/layout
+.test_page
+	| Hello on test page
+	.test_wrap
+		ul.users_list
+			li(ng-repeat="user in test.users", ng-class-odd="'red'")
+				| {{ user.first_name }} {{ user.last_name }} — {{ user.email }}
+				button(ng-click="test.getInfo(user)")
+					| Get info
 
-block content
-	.test_page
-		| Hello on test page
-		.test_wrap(ng-controller="TestController as test")
-			ul.users_list
-				li(ng-repeat="user in test.users", ng-class-odd="'red'")
-					| {{ user.first_name }} {{ user.last_name }} — {{ user.email }}
-					button(ng-click="test.getInfo(user)")
-						| Get info
-
-			br
-			textarea(ng-model="text", name="text")
-			input
-			br
-			pre
-				| {{ text }}
+		br
+		textarea(ng-model="text", name="text")
+		input
+		br
+		pre
+			| {{ text }}

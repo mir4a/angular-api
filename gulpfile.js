@@ -7,7 +7,7 @@ var reload = browserSync.reload;
 gulp.task('default', ['jade', 'browser-sync']);
 
 var paths = {
-  "view": "./front-end/**/*.jade",
+  "view": ["./front-end/**/*.jade"],
   "styles": "./front-end/**/*.scss",
   "backend": ["./back-end/**/*.js", "app.js"],
   "front": "./front-end/**/*.js"

@@ -1,0 +1,7 @@
+.home_page
+	br
+	ul
+		li(ng-repeat="message in home.messages")
+			| {{ message.text }}
+			br
+			| — {{ message.author }}
