@@ -1,4 +1,4 @@
-extends layout
+extends ../templates/layout
 
 block content
 	.test_page
@@ -7,9 +7,12 @@ block content
 			ul.users_list
 				li(ng-repeat="user in test.users", ng-class-odd="'red'")
 					| {{ user.first_name }} {{ user.last_name }} — {{ user.email }}
+					button(ng-click="test.getInfo(user)")
+						| Get info
 
 			br
 			textarea(ng-model="text", name="text")
+			input
 			br
 			pre
 				| {{ text }}

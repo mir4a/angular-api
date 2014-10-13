@@ -56,6 +56,10 @@
       }
     ];
 
+    self.getInfo = function (user) {
+      alert('Hello, ' + user.first_name + '!');
+    }
+
 
 
   });

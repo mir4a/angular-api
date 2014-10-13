@@ -2,7 +2,6 @@ extends layout
 
 block content
 	.home_page(ng-controller="MainController as main")
-		| {{ 'Hi! this is angular!' + '1 + 1 = ' + (1 + 1) + ' ?' }}
 		br
 		ul
 			li(ng-repeat="message in main.messages")
