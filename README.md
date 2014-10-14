@@ -1,11 +1,27 @@
-# About
+# Setup
 
-Shaping Up with **Angular.js** is sets of tutorials to get  acquainted with AngularJS basics. See more on [http://campus.codeschool.com/courses/shaping-up-with-angular-js]
+## NPM
+```
+npm install
+```
+## Bower
+```
+bower install
+```
 
-## Further Reading
+# Run app
+```
+node server.js
+```
 
-- [http://docs.angularjs.org]
-- [http://egghead.io] Protractor test
-- [http://thinkster.io]
-- [http://kapeli.com/dash] Dash app
-- [http://meetup.com] search for Angular meetups
+# Gulp
+```
+gulp
+```
+
+# Tests
+```
+karma start karma.conf.js
+```
+
+*Run `npm install -g karma-cli` if you don't Karma cli yet*
