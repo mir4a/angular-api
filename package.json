@@ -26,6 +26,9 @@
     "gulp-jade": "~0.8.0",
     "gulp-sass": "~1.0.0",
     "browser-sync": "~1.5.7",
-    "gulp-nodemon": "~1.0.4"
+    "gulp-nodemon": "~1.0.4",
+    "karma": "~0.12.24",
+    "karma-jasmine": "~0.1.5",
+    "karma-chrome-launcher": "~0.1.5"
   }
 }
