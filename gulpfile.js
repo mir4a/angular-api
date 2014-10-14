@@ -3,6 +3,7 @@ var jade = require('gulp-jade');
 var sass = require('gulp-sass');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
+var nodemon = require('gulp-nodemon');
 
 gulp.task('default', ['jade', 'browser-sync']);
 
@@ -40,4 +41,11 @@ gulp.task('jade', [], function () {
     .pipe(jade())
     .pipe(gulp.dest('./front-end/'))
     .pipe(reload({stream: true}))
+});
+
+gulp.task('develop', function () {
+  nodemon({ script: 'server.js', ext: 'js', ignore: ['./front-end/*'] })
+    .on('restart', function () {
+      console.log('restarted!')
+    })
 });

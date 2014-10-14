@@ -1,7 +1,15 @@
-.home_page
-	br
-	ul
-		li(ng-repeat="message in home.messages")
-			| {{ message.text }}
-			br
-			| — {{ message.author }}
+.users_page
+	section.create_new
+		form.form(name="form" )
+			.form-group
+				label.control-label(for="email") Email
+				input#email.form-control(type="email", name="email" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/", required, ng-model="users.email")
+			.form-group
+				label.control-label(for="first_name") First Name
+				input#first_name.form-control(type="text", name="first_name" ng-model="users.first_name", required)
+			.form-group
+				label.control-label(for="last_name") Last Name
+				input#last_name.form-control(type="text", ng-model="users.last_name", required)
+
+			.form-group
+				button.btn.btn-success(ng-show="form.$valid" ng-click="users.saveUser()") Save
