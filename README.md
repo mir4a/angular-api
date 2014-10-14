@@ -1,5 +1,12 @@
 # Setup
 
+## Requirements
+
+You should have installed these dependencies for successfully running this app:
+– node.js
+– MongoDB
+
+
 ## NPM
 ```
 npm install
@@ -10,8 +17,14 @@ bower install
 ```
 
 # Run app
+
+## Run node js server
 ```
 node server.js
+```
+## Run MongoDB server
+```
+mongod
 ```
 
 # Gulp
