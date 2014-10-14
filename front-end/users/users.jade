@@ -13,3 +13,15 @@
 
 			.form-group
 				button.btn.btn-success(ng-show="form.$valid" ng-click="users.saveUser()") Save
+	hr
+	a.btn.btn-warning.btn-sm(ng-click="users.getUsers()") Fetch users
+	section.all_users.panel.panel-warning
+		table.table
+			tr
+				th Email
+				th First name
+				th Last name
+			tr(ng-repeat="user in users.items")
+				td {{ user._id }}
+				td {{ user.first_name }}
+				td {{ user.last_name }}

@@ -24,9 +24,11 @@ module.exports = function (app) {
   });
 
   app.post('/api/users', function (req, res, next) {
-    var email = cleanString(req.param('email'));
+    var email = cleanString(req.param('_id'));
     var first_name = cleanString(req.param('first_name'));
     var last_name = cleanString(req.param('last_name'));
+
+    console.log(req.body);
 
     User.findById(email, function(err, user) {
       if (err) return next(err);
@@ -45,9 +47,9 @@ module.exports = function (app) {
       }, function (err, newUser) {
         if (err) {
           console.log(err);
-//          if (err instanceof mongoose.Error.ValidationError) {
-//            return invalid();
-//          }
+          if (err instanceof mongoose.Error.ValidationError) {
+            console.log(new Error('Mongoose validate error'));
+          }
           return next(err);
         }
 
