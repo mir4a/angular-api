@@ -4,36 +4,49 @@ angular
 
 function UsersController($http) {
   var self = this;
-
+  self.notification = {};
+  self.showNotification = false;
+  self.user = {};
   self.items = [];
+  self.totalUsers = 0;
+  self.pages = [];
 
-  self.saveUser = function() {
-    console.log(self);
+  self.saveUser = function () {
 
     $http.post('/api/users', {
-      _id: self.email,
-      first_name: self.first_name,
-      last_name: self.last_name
-    }).success(function(data, status, headers, config) {
-      console.log(data);
-      console.log(status);
-      console.log(headers);
-      console.log(config);
-    }).error(function(data, status, headers, config) {
+      _id: self.user.email,
+      first_name: self.user.first_name,
+      last_name: self.user.last_name
+    }).success(function (data, status, headers, config) {
+      self.showNotification = true;
+      self.notification = data;
+      self.user = {};
+    }).error(function (data, status, headers, config) {
       console.error(data);
       console.error(status);
     });
   };
 
-  self.getUsers = function () {
-    $http.get('/api/users', {})
+  self.getUsers = function (page) {
+    $http.get('/api/users/' + page, {})
       .success(function (data, status, headers, config) {
-        self.items = data;
+        self.items = data.users;
+        self.totalUsers = data.total;
+        self.pagination();
       })
       .error(function (data, status, headers, config) {
         console.error(data);
         console.error(status);
       });
+  };
+
+  self.pagination = function () {
+    var k = 1;
+    self.pages = [];
+    for (var i = 0; i < self.totalUsers; i += 10) {
+      self.pages.push(k);
+      k++;
+    }
   }
 
 }

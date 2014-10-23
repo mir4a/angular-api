@@ -29,6 +29,7 @@
     "gulp-nodemon": "~1.0.4",
     "karma": "~0.12.24",
     "karma-jasmine": "~0.1.5",
-    "karma-chrome-launcher": "~0.1.5"
+    "karma-chrome-launcher": "~0.1.5",
+    "gulp-sourcemaps": "~1.2.4"
   }
 }

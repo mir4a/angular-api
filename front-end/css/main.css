@@ -1,15 +1,16 @@
 .ng-invalid.ng-dirty {
-    border-color: orangered;
-}
+  border-color: orangered; }
 
 .ng-valid.ng-dirty {
-    border-color: darkgreen;
-}
+  border-color: darkgreen; }
 
 h3.panel-heading {
-    margin-top: 0;
-}
+  margin-top: 0; }
 
 .users_list .red {
-    color: red;
-}
+  color: red; }
+
+.users_page .pagination {
+  margin: 0; }
+  .users_page .pagination > li:hover {
+    cursor: pointer; }

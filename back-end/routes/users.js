@@ -13,12 +13,22 @@ module.exports = function (app) {
   app.use(bodyParser.json());
 
 
-  app.get('/api/users', function (req, res) {
-
-    User.find().sort('created').limit(10).exec(function (err, users) {
+  app.get('/api/users/:page', function (req, res) {
+    var page = req.params.page;
+    var limit = 10;
+    var offset = page * limit;
+    User.count({}, function (err, count) {
       if (err) return next(err);
 
-      res.send(users);
+      console.log("Number of users:", count);
+      console.log("Offset:", offset);
+      console.log("limit:", limit);
+
+      User.find().sort('created').skip(offset).limit(limit).exec(function (err, users) {
+        if (err) return next(err);
+
+        res.json({users: users, total: count});
+      });
     });
 
   });
@@ -30,11 +40,11 @@ module.exports = function (app) {
 
     console.log(req.body);
 
-    User.findById(email, function(err, user) {
+    User.findById(email, function (err, user) {
       if (err) return next(err);
 
       if (user) {
-        return res.send({error:'exist', msg: 'user is already exist'});
+        return res.json({error: 'exist', msg: 'user is already exist'});
       }
 
       console.log('User find by one');
@@ -48,14 +58,16 @@ module.exports = function (app) {
         if (err) {
           console.log(err);
           if (err instanceof mongoose.Error.ValidationError) {
-            console.log(new Error('Mongoose validate error'));
+            var error = new Error('Mongoose validate error');
+            console.log(error);
+            res.json({error: error.name, msg: error.message});
           }
           return next(err);
         }
 
         console.log('created user: %s', newUser);
+        return res.json({msg: 'Well done!'});
       });
-
 
 
     });

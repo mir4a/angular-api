@@ -3,25 +3,33 @@
 		form.form(name="form" )
 			.form-group
 				label.control-label(for="email") Email
-				input#email.form-control(type="email", name="email" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/", required, ng-model="users.email")
+				input#email.form-control(type="email", name="email" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/", required, ng-model="users.user.email")
 			.form-group
 				label.control-label(for="first_name") First Name
-				input#first_name.form-control(type="text", name="first_name" ng-model="users.first_name", required)
+				input#first_name.form-control(type="text", name="first_name" ng-model="users.user.first_name", required)
 			.form-group
 				label.control-label(for="last_name") Last Name
-				input#last_name.form-control(type="text", ng-model="users.last_name", required)
-
+				input#last_name.form-control(type="text", ng-model="users.user.last_name", required)
 			.form-group
 				button.btn.btn-success(ng-show="form.$valid" ng-click="users.saveUser()") Save
+		.alert(role="alert" ng-show="users.showNotification" ng-class="{'alert-danger': users.notification.error, 'alert-success': !users.notification.error}") {{ users.notification.msg }}
 	hr
-	a.btn.btn-warning.btn-sm(ng-click="users.getUsers()") Fetch users
+	.clearfix
+		.pull-left
+			a.btn.btn-warning.btn-sm(ng-click="users.getUsers(0)") Fetch users
+		.pull-right
+			ul.pagination.pagination-sm(ng-show="users.totalUsers > 10")
+				li(ng-repeat="page in users.pages track by $index")
+					a(ng-click="users.getUsers($index)") {{$index + 1}}
 	section.all_users.panel.panel-warning
 		table.table
 			tr
+				th #
 				th Email
 				th First name
 				th Last name
 			tr(ng-repeat="user in users.items")
+				td {{ $index + 1 }}
 				td {{ user._id }}
 				td {{ user.first_name }}
 				td {{ user.last_name }}

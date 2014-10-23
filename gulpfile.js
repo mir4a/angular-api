@@ -4,8 +4,9 @@ var sass = require('gulp-sass');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 var nodemon = require('gulp-nodemon');
+var sourcemaps = require('gulp-sourcemaps');
 
-gulp.task('default', ['jade', 'browser-sync']);
+gulp.task('default', ['jade', 'browser-sync', 'sass']);
 
 var paths = {
   "view": ["./front-end/**/*.jade"],
@@ -14,19 +15,19 @@ var paths = {
   "front": "./front-end/**/*.js"
 };
 
-var watcher = gulp.watch([paths.view, paths.backend, paths.styles, paths.front], ['jade']);
+var watcher = gulp.watch([paths.view, paths.backend, paths.styles, paths.front], ['jade', 'sass']);
 
 watcher.on('change', function(event) {
   console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
 });
 
 gulp.task('sass', [], function () {
-  gulp.src('./front-end/css/main.scss')
-    .pipe(sourcemaps.init())
-    //    .pipe(sass({"outputStyle":"compressed"}))
+  gulp.src(paths.styles)
+//    .pipe(sourcemaps.init())
+//    .pipe(sass({"outputStyle":"compressed"}))
     .pipe(sass())
-    .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('./front-end/css/'))
+//    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest('./front-end/'))
     .pipe(reload({stream: true}))
 });
 
