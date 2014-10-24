@@ -5,6 +5,7 @@ var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 var nodemon = require('gulp-nodemon');
 var sourcemaps = require('gulp-sourcemaps');
+var karma = require('gulp-karma');
 
 gulp.task('default', ['jade', 'browser-sync', 'sass']);
 
@@ -49,4 +50,24 @@ gulp.task('develop', function () {
     .on('restart', function () {
       console.log('restarted!')
     })
+});
+
+gulp.task('test', function() {
+  // Be sure to return the stream
+  // NOTE: Using the fake './foobar' so as to run the files
+  // listed in karma.conf.js INSTEAD of what was passed to
+  // gulp.src !
+  return gulp.src('./')
+    .pipe(karma(
+      {
+          configFile: 'karma.conf.js',
+          singleRun: true,
+          action: 'run'
+      }
+    ))
+    .on('error', function(err) {
+      // Make sure failed tests cause gulp to exit non-zero
+      console.log(err);
+      this.emit('end'); //instead of erroring the stream, end it
+    });
 });

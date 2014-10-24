@@ -11,14 +11,16 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'front-end/vendor/angular/angular.js',
-      'front-end/vendor/angular-mocks/angular-mocks.js',
-      'front-end/**/*.html',
+//      'front-end/vendor/angular/angular.js',
+//      'front-end/vendor/angular-mocks/angular-mocks.js',
+//      'front-end/**/*.html',
       'test/e2e/*.js'
     ],
 
     // list of files / patterns to exclude
-    exclude: [],
+    exclude: [
+      'front-end/vendor/**/*.js'
+    ],
 
     // web server port
     port: 8080,
@@ -49,7 +51,7 @@ module.exports = function(config) {
 
     // Uncomment the following lines if you are using grunt's server to run the tests
     proxies: {
-      '/': 'http://localhost:9000/'
+      '/': 'http://localhost:3000/'
     },
     // URL root prevent conflicts with the site root
     urlRoot: '_karma_'

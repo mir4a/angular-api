@@ -30,6 +30,8 @@
     "karma": "~0.12.24",
     "karma-jasmine": "~0.1.5",
     "karma-chrome-launcher": "~0.1.5",
-    "gulp-sourcemaps": "~1.2.4"
+    "gulp-sourcemaps": "~1.2.4",
+    "gulp-karma": "0.0.4",
+    "karma-ng-scenario": "~0.1.0"
   }
 }
