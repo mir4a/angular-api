@@ -1,8 +1,16 @@
-describe("Login Flow", function() {
+describe("Home page", function() {
   beforeEach(function() {
-    return browser().navigateTo("/");
+    browser.get("http://localhost:3055/#/");
   });
-  return it("should be the first page", function() {
-    return expect(element("h1").text()).toBe("Welcome to homepage");
+
+  var messagesCount = 0;
+
+  it("should be the first page", function() {
+    expect($(".heading").getText()).toBe("Welcome to homepage");
   });
+
+  it("should has 3 messages", function() {
+      expect(element.all(by.css('.messages > li')).count()).toBe(3);
+  });
+
 });

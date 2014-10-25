@@ -6,6 +6,10 @@ var reload = browserSync.reload;
 var nodemon = require('gulp-nodemon');
 var sourcemaps = require('gulp-sourcemaps');
 var karma = require('gulp-karma');
+var protractor = require("gulp-protractor").protractor;
+//var webdriver_standalone = require("gulp-protractor").webdriver_standalone;
+//
+//gulp.task('webdriver_standalone', webdriver_standalone);
 
 gulp.task('default', ['jade', 'browser-sync', 'sass']);
 
@@ -18,7 +22,7 @@ var paths = {
 
 var watcher = gulp.watch([paths.view, paths.backend, paths.styles, paths.front], ['jade', 'sass']);
 
-watcher.on('change', function(event) {
+watcher.on('change', function (event) {
   console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
 });
 
@@ -32,9 +36,9 @@ gulp.task('sass', [], function () {
     .pipe(reload({stream: true}))
 });
 
-gulp.task('browser-sync', function() {
+gulp.task('browser-sync', function () {
   browserSync({
-    proxy: "localhost:3000"
+    proxy: "localhost:3055"
   });
 });
 
@@ -52,7 +56,7 @@ gulp.task('develop', function () {
     })
 });
 
-gulp.task('test', function() {
+gulp.task('test', function () {
   // Be sure to return the stream
   // NOTE: Using the fake './foobar' so as to run the files
   // listed in karma.conf.js INSTEAD of what was passed to
@@ -60,14 +64,26 @@ gulp.task('test', function() {
   return gulp.src('./')
     .pipe(karma(
       {
-          configFile: 'karma.conf.js',
-          singleRun: true,
-          action: 'run'
+        configFile: 'karma.conf.js',
+        singleRun: true,
+        action: 'run'
       }
     ))
-    .on('error', function(err) {
+    .on('error', function (err) {
       // Make sure failed tests cause gulp to exit non-zero
       console.log(err);
       this.emit('end'); //instead of erroring the stream, end it
     });
+});
+
+gulp.task('protractor', function () {
+
+  gulp.src(["./test/e2e/*Spec.js"])
+    .pipe(protractor({
+      configFile: "test/protractor.config.js",
+      args: ['--baseUrl', 'http://127.0.0.1:3055']
+    }))
+    .on('error', function (e) {
+      throw e
+    })
 });

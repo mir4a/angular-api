@@ -33,8 +33,17 @@ gulp
 ```
 
 # Tests
+
+*Test stack is presented by karma with jasmine and protractor*
+
+## Unit tests
 ```
 karma start karma.conf.js
 ```
-
 *Run `npm install -g karma-cli` if you don't Karma cli yet*
+
+## End-to-end tests
+```
+protractor test/protractor.config.js
+```
+

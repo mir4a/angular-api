@@ -8,8 +8,8 @@
 					| Get info
 
 		br
-		textarea(ng-model="text", name="text")
-		input
-		br
-		pre
-			| {{ text }}
+		form(name="message")
+			// FIXME: Debounce didn't work seems like form scope is wrong
+			textarea(ng-model="text", ng-keyup="cancel($event)", name="text", ng-model-options="{ debounce: 1000 }")
+		pre(ng-bind="text")
+		pre {{ text }}
