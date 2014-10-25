@@ -37,40 +37,51 @@ module.exports = function (app) {
     var email = cleanString(req.param('_id'));
     var first_name = cleanString(req.param('first_name'));
     var last_name = cleanString(req.param('last_name'));
-
-    console.log(req.body);
-
-    User.findById(email, function (err, user) {
-      if (err) return next(err);
-
-      if (user) {
-        return res.json({error: 'exist', msg: 'user is already exist'});
-      }
-
-      console.log('User find by one');
+    var remove = req.param('remove');
 
 
-      User.create({
-        _id: email,
-        first_name: first_name,
-        last_name: last_name
-      }, function (err, newUser) {
-        if (err) {
-          console.log(err);
-          if (err instanceof mongoose.Error.ValidationError) {
-            var error = new Error('Mongoose validate error');
-            console.log(error);
-            res.json({error: error.name, msg: error.message});
-          }
-          return next(err);
+    if (remove) {
+      User.remove({_id: email}, function (err) {
+        if (err) return next(err);
+
+        return res.json({msg: "User "+ email +" has been removed"});
+
+      });
+    } else {
+      User.findById(email, function (err, user) {
+        if (err) return next(err);
+
+        if (user) {
+          return res.json({error: 'exist', msg: 'user is already exist'});
         }
 
-        console.log('created user: %s', newUser);
-        return res.json({msg: 'Well done!'});
+        console.log('User find by one');
+
+
+        User.create({
+          _id: email,
+          first_name: first_name,
+          last_name: last_name
+        }, function (err, newUser) {
+          if (err) {
+            console.log(err);
+            if (err instanceof mongoose.Error.ValidationError) {
+              var error = new Error('Mongoose validate error');
+              console.log(error);
+              res.json({error: error.name, msg: error.message});
+            }
+            return next(err);
+          }
+
+          console.log('created user: %s', newUser);
+          return res.json({msg: 'Well done!'});
+        });
+
+
       });
+    }
 
 
-    });
 
     console.log(req.body);
 

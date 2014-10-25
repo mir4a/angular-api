@@ -14,3 +14,10 @@ h3.panel-heading {
   margin: 0; }
   .users_page .pagination > li:hover {
     cursor: pointer; }
+.users_page .remove_btn {
+  color: orangered;
+  font: bold 15px/1 sans-serif;
+  padding: 0;
+  margin-right: 5px;
+  background: none;
+  border: none; }

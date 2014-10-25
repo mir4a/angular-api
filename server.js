@@ -28,8 +28,8 @@ mongoose.connect('mongodb://localhost/angular_api', function(err){
   console.log('Mongoose is connected');
 
 
-  app.listen(3055, function () {
-    console.log('now listening on localhost:3055');
+  app.listen(3000, function () {
+    console.log('now listening on localhost:3000');
   });
 
 });

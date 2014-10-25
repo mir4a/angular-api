@@ -38,7 +38,7 @@ gulp.task('sass', [], function () {
 
 gulp.task('browser-sync', function () {
   browserSync({
-    proxy: "localhost:3055"
+    proxy: "localhost:3000"
   });
 });
 
@@ -81,7 +81,7 @@ gulp.task('protractor', function () {
   gulp.src(["./test/e2e/*Spec.js"])
     .pipe(protractor({
       configFile: "test/protractor.config.js",
-      args: ['--baseUrl', 'http://127.0.0.1:3055']
+      args: ['--baseUrl', 'http://127.0.0.1:  3000']
     }))
     .on('error', function (e) {
       throw e
