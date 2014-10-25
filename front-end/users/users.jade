@@ -30,7 +30,7 @@
 				th Last name
 				th Created at
 			tr(ng-repeat="user in users.items")
-				td {{ $index + 1 }}
+				td {{ user.number }}
 				td
 					button.remove_btn(ng-click="users.removeUser(user._id)") &times;
 					| {{ user._id }}

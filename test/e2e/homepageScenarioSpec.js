@@ -1,6 +1,6 @@
 describe("Home page", function() {
   beforeEach(function() {
-    browser.get("http://localhost:3055/#/");
+    browser.get("http://localhost:3000/#/");
   });
 
   var messagesCount = 0;

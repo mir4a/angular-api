@@ -1,8 +1,8 @@
 angular
-  .module('api.users')
-  .controller('UsersController', ['$http', UsersController]);
+  .module('api.users', ['ngCookies'])
+  .controller('UsersController', ['$http', '$cookies', UsersController]);
 
-function UsersController($http) {
+function UsersController($http, $cookies) {
   var self = this;
   self.notification = {};
   self.showNotification = false;
@@ -10,6 +10,7 @@ function UsersController($http) {
   self.items = [];
   self.totalUsers = 0;
   self.pages = [];
+  var pageCookie = $cookies.usersPage ? $cookies.usersPage : 0;
 
   self.saveUser = function () {
 
@@ -27,11 +28,23 @@ function UsersController($http) {
     });
   };
 
-  self.getUsers = function (page) {
-    page = page ? page : 0;
+  self.getUsers = function (page, offset) {
+
+
+    page = page ? page : pageCookie;
+    offset = offset ? offset : 10;
+    offset *= page;
+
+    $cookies.usersPage = page;
+
     $http.get('/api/users/' + page, {})
       .success(function (data, status, headers, config) {
-        self.items = data.users;
+        var users = data.users;
+        users.forEach(function(el,i,arr) {
+          el.number = i + 1 + offset;
+//          console.log(el)
+        });
+        self.items = users;
         self.totalUsers = data.total;
         self.pagination();
       })

@@ -1,6 +1,6 @@
 describe("Home page", function() {
   beforeEach(function() {
-    browser.get("http://localhost:3055/#/users");
+    browser.get("http://localhost:3000/#/users");
   });
 
   it("should has form with 3 inputs", function() {
@@ -29,6 +29,9 @@ describe("Home page", function() {
   });
 
   it("should show success message if all fields are valid", function() {
+    var example_email = "john@example.com";
+//    FIXME: Clear test data before and after test run
+//    browser.post("http://localhost:3000/#/api/users", {_id: example_email, remove: true});
     var email = element(by.model('users.user.email'));
     var first_name = element(by.model('users.user.first_name'));
     var last_name = element(by.model('users.user.last_name'));
@@ -37,13 +40,15 @@ describe("Home page", function() {
     first_name.clear();
     last_name.clear();
 
-    email.sendKeys("john@example.com");
+    email.sendKeys(example_email);
     first_name.sendKeys("John");
     last_name.sendKeys("Doe");
 
     submit.click();
 
     expect($('.alert').getText()).toBe("Well done!");
+
+//    browser.post("http://localhost:3000/#/api/users", {_id: example_email, remove: true});
 
   });
 
