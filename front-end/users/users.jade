@@ -15,12 +15,10 @@
 		.alert(role="alert" ng-show="users.showNotification" ng-class="{'alert-danger': users.notification.error, 'alert-success': !users.notification.error}") {{ users.notification.msg }}
 	hr
 	.clearfix
-		.pull-left
-			a.btn.btn-warning.btn-sm(ng-click="users.getUsers(0)") Fetch users
 		.pull-right
 			ul.pagination.pagination-sm(ng-show="users.totalUsers > 10")
 				li(ng-repeat="page in users.pages track by $index")
-					a(ng-click="users.getUsers($index)") {{$index + 1}}
+					a(ng-click="users.getUsers($index + 1)") {{$index + 1}}
 	section.all_users.panel.panel-warning
 		table.table
 			tr

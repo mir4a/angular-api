@@ -10,7 +10,7 @@ function UsersController($http, $cookies) {
   self.items = [];
   self.totalUsers = 0;
   self.pages = [];
-  var pageCookie = $cookies.usersPage ? $cookies.usersPage : 0;
+  self.page = $cookies.usersPage ? $cookies.usersPage : 0;
 
   self.saveUser = function () {
 
@@ -22,6 +22,7 @@ function UsersController($http, $cookies) {
       self.showNotification = true;
       self.notification = data;
       self.user = {};
+      self.getUsers();
     }).error(function (data, status, headers, config) {
       console.error(data);
       console.error(status);
@@ -30,8 +31,7 @@ function UsersController($http, $cookies) {
 
   self.getUsers = function (page, offset) {
 
-
-    page = page ? page : pageCookie;
+    page = page ? page - 1 : self.page;
     offset = offset ? offset : 10;
     offset *= page;
 
@@ -42,7 +42,6 @@ function UsersController($http, $cookies) {
         var users = data.users;
         users.forEach(function(el,i,arr) {
           el.number = i + 1 + offset;
-//          console.log(el)
         });
         self.items = users;
         self.totalUsers = data.total;
@@ -80,5 +79,7 @@ function UsersController($http, $cookies) {
     }
 
   };
+
+  self.getUsers();
 
 }
