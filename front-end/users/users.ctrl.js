@@ -10,7 +10,7 @@ function UsersController($http, $cookies) {
   self.items = [];
   self.totalUsers = 0;
   self.pages = [];
-  self.page = $cookies.usersPage ? $cookies.usersPage : 0;
+  self.page = $cookies.usersPage ? parseFloat($cookies.usersPage) : 0;
 
   self.saveUser = function () {
 
@@ -31,11 +31,14 @@ function UsersController($http, $cookies) {
 
   self.getUsers = function (page, offset) {
 
-    page = page ? page - 1 : self.page;
+    page = page ? page : self.page;
+    $cookies.usersPage = page;
+    if (page > 0) {
+      page = page -1;
+    }
     offset = offset ? offset : 10;
     offset *= page;
 
-    $cookies.usersPage = page;
 
     $http.get('/api/users/' + page, {})
       .success(function (data, status, headers, config) {

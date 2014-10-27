@@ -1,4 +1,4 @@
-describe("Home page", function() {
+describe("Users page", function() {
   beforeEach(function() {
     browser.get("http://localhost:3000/#/users");
   });
