@@ -7,6 +7,9 @@ var nodemon = require('gulp-nodemon');
 var sourcemaps = require('gulp-sourcemaps');
 var karma = require('gulp-karma');
 var protractor = require("gulp-protractor").protractor;
+var jsdoc = require("gulp-jsdoc");
+var gulpIgnore = require('gulp-ignore');
+
 //var webdriver_standalone = require("gulp-protractor").webdriver_standalone;
 //
 //gulp.task('webdriver_standalone', webdriver_standalone);
@@ -86,4 +89,10 @@ gulp.task('protractor', function () {
     .on('error', function (e) {
       throw e
     })
+});
+
+gulp.task('docs', function () {
+  gulp.src(["./front-end/users/*.js", "README.md"])
+    .pipe(jsdoc.parser())
+    .pipe(gulp.dest("./docs"))
 });

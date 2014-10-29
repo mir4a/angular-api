@@ -12,6 +12,9 @@ function UsersController($http, $cookies) {
   self.pages = [];
   self.page = $cookies.usersPage ? parseFloat($cookies.usersPage) : 0;
 
+  /**
+   * Sending POST request with new user's data to server api. Takes users model as data.
+   */
   self.saveUser = function () {
 
     $http.post('/api/users', {
@@ -29,6 +32,11 @@ function UsersController($http, $cookies) {
     });
   };
 
+  /**
+   * Sending GET request with page number and offset params to server api.
+   * @param {(number|string)} page - page number for navigating through users collection
+   * @param {(number|string)} [offset=10] offset - represents how many users should be returned from server. By default is 10.
+   */
   self.getUsers = function (page, offset) {
 
     page = page ? page : self.page;
@@ -56,15 +64,24 @@ function UsersController($http, $cookies) {
       });
   };
 
-  self.pagination = function () {
+  /**
+   * Helper method for calculate of number of pages for simple pagination
+   * @param {(number|string)} [offset=10] offset - represents how many users should be shown on page. By default is 10.
+   */
+  self.pagination = function (offset) {
     var k = 1;
+    offset = offset ? offset : 10;
     self.pages = [];
-    for (var i = 0; i < self.totalUsers; i += 10) {
+    for (var i = 0; i < self.totalUsers; i += offset) {
       self.pages.push(k);
       k++;
     }
   };
 
+  /**
+   * Remove user method on view. Sending POST request with remove parameter.
+   * @param {string} id - user's id (email)
+   */
   self.removeUser = function (id) {
     var sure = confirm("Are you sure you want to remove user with email: " + id + "?");
     if (sure) {
