@@ -12,7 +12,7 @@ module.exports = function (app) {
 
   app.use(bodyParser.json());
 
-
+  // TODO: can be moved into separate callbacks, ex. getUsersHelper from 17line to 34. Ex. app.post('/gaviota-api/course/:courseId/invitation', notTrainee('inviteCourseTrainees'));
   app.get('/api/users/:page', function (req, res) {
     var page = req.params.page;
     var limit = 10;
@@ -32,7 +32,7 @@ module.exports = function (app) {
     });
 
   });
-
+// TODO: Add tests for server side
   app.post('/api/users', function (req, res, next) {
     var email = cleanString(req.param('_id'));
     var first_name = cleanString(req.param('first_name'));
@@ -57,7 +57,7 @@ module.exports = function (app) {
 
         console.log('User find by one');
 
-
+//        TODO: add validation before Mongoose https://www.npmjs.org/package/joi
         User.create({
           _id: email,
           first_name: first_name,

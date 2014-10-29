@@ -12,6 +12,7 @@ function UsersController($http, $cookies) {
   self.pages = [];
   self.page = $cookies.usersPage ? parseFloat($cookies.usersPage) : 0;
 
+//  TODO: move to service all post requests (may be)
   /**
    * Sending POST request with new user's data to server api. Takes users model as data.
    */
